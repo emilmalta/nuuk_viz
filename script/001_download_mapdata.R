@@ -31,7 +31,6 @@ to_download <- overview %>%
 filenames <- overview %>% 
   filter(
     str_sub(file, end = -5) %in% to_download,
-    str_detect(file, ".sh[px]")
   ) %>% 
   pull(file)
 
