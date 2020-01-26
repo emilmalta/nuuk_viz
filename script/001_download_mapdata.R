@@ -10,10 +10,9 @@ library(here)
 url <- "ftp://Asiaqs_grundkort:%20@ftp.asiaq.gl/06_NUK/0600_NUK/SHP/"
 
 # Downloading the whole thing is ~750 MB. Inspect files first.
-getURL(url) %>% 
-  writeLines(here("data/map_overview.txt"))
-
-overview <- read.table(here("data/map_overview.txt")) %>% 
+overview <- getURL(url) %>% 
+  textConnection() %>% 
+  read.table() %>% 
   select(file = ncol(.), filesize = V5)
 
 # Select which files to download -----------------------------------------------
