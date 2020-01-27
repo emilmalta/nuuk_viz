@@ -11,8 +11,7 @@ url <- "ftp://Asiaqs_grundkort:%20@ftp.asiaq.gl/06_NUK/0600_NUK/SHP/"
 
 # Downloading the whole thing is ~750 MB. Inspect files first.
 overview <- getURL(url) %>% 
-  textConnection() %>% 
-  read.table() %>% 
+  read_table(col_names = FALSE) %>% 
   select(file = ncol(.), filesize = V5)
 
 # Select which files to download -----------------------------------------------
