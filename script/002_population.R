@@ -21,7 +21,7 @@ nuuk_pop_raw <-
     query = list("age" = "*",
                  "place of birth" = c("N", "S"),
                  "citydistrict"=c("1","2","3","4","9"),
-                 "gender"=c("1","2"),
+                 "gender"=c("M","K"),
                  "time"="2019")
   ) %>% 
   clean_names()
@@ -31,7 +31,7 @@ nuuk_houses_raw <-
   pxweb_get_data(
     url = "http://bank.stat.gl/api/v1/en/Greenland/BE/BE60/BE6010/BEXHUSNUK.PX",
     query =list(
-      "residence" = c("1","2","3","4","8","9"),
+      "residence" = c("1","2","3","4","9"),
       "type of address" = "0",
       "size" = "*",
       "type" = "*",
@@ -53,7 +53,7 @@ pretty_col <- function(str) {
 
 # Population data
 nuuk_pop <- nuuk_pop_raw %>% 
-  mutate_at(c("age", "time"), as.numeric) %>% 
+  mutate_at(c("age", "time"), strtoi) %>% 
   uncount(population_in_nuuk) 
 
 # Households
